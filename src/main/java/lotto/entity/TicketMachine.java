@@ -7,9 +7,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class TicketMachine {
+    public static final int TICKET_PRICE = 1000;
 
-    public List<Ticket> buy(int price) {
-        var ticketCount = price / 1000;
+    public List<Ticket> buy(Amount amount) {
+        var ticketCount = amount.getAmount() / TICKET_PRICE;
 
         var tickets = new ArrayList<Ticket>();
         for (int i = 0; i < ticketCount; i++) {

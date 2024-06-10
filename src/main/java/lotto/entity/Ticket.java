@@ -3,7 +3,7 @@ package lotto.entity;
 import java.util.List;
 
 public class Ticket {
-    public static final int LOTTO_COUNT = 6;
+    private static final int LOTTO_COUNT = 6;
     private List<Integer> numbers;
 
     public Ticket(List<Integer> numbers) {
