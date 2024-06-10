@@ -1,15 +1,17 @@
 package lotto.entity;
 
+import lotto.enums.LottoRank;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class GameManager {
-    public Map<LottoRank, Integer> getWinningDetails(List<Integer> winningNumber, int bonusNumber, List<Ticket> userTickets) {
+    public Map<LottoRank, Integer> getWinningDetails(WinningNumber winningNumber, Number bonusNumber, List<Ticket> userTickets) {
         Map<LottoRank, Integer> result = new HashMap<>();
         for (Ticket ticket : userTickets) {
-            var matchCount = getMatchCount(winningNumber, ticket);
-            if (ticket.getNumbers().contains(bonusNumber)
+            var matchCount = getMatchCount(winningNumber.getWinningNumber(), ticket);
+            if (ticket.getNumbers().contains(bonusNumber.getNumber())
                     && LottoRank.SECOND.getMatchCount() == matchCount) {
                 extracted(LottoRank.SECOND, result);
 
@@ -45,5 +47,14 @@ public class GameManager {
         }
 
         return result;
+    }
+
+    public double getProfitRate(Amount amount, Map<LottoRank, Integer> countByLottoRank) {
+        var result = 0.0;
+        for (LottoRank rank : LottoRank.values()) {
+            result += rank.getReward() * countByLottoRank.getOrDefault(rank, 0);
+        }
+
+        return result / amount.getAmount();
     }
 }

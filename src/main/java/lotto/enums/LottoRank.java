@@ -1,4 +1,4 @@
-package lotto.entity;
+package lotto.enums;
 
 public enum LottoRank {
     FIFTH(3, 5000),
