@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.entity.GameManager;
-import lotto.entity.TicketMachine;
+import lotto.entity.LottoMachine;
 
 public class ViewManager2 {
     private final InputView inputView = new InputView();
@@ -12,7 +12,7 @@ public class ViewManager2 {
         var lottoCount = inputView.inputLottoCount();
         var manualTickets = inputView.inputLottoNumbers(lottoCount);
 
-        var ticketMachine = new TicketMachine();
+        var ticketMachine = new LottoMachine();
         var remainAmount = ticketMachine.calculateRemainAmount(amount, manualTickets);
         var autoTickets = ticketMachine.buy(remainAmount);
         resultView.showTicketDetail2(manualTickets, autoTickets);

@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.entity.GameManager;
-import lotto.entity.TicketMachine;
+import lotto.entity.LottoMachine;
 
 public class ViewManager {
     private final InputView inputView = new InputView();
@@ -10,8 +10,8 @@ public class ViewManager {
     public void start() {
         var amount = inputView.inputAmount();
 
-        var ticketMachine = new TicketMachine();
-        var tickets = ticketMachine.buy(amount);
+        var lottoMachine = new LottoMachine();
+        var tickets = lottoMachine.buy(amount);
         resultView.showTicketDetail(tickets);
 
         var winningNumber = inputView.inputWinningNumber();
