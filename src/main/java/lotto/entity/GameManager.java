@@ -2,6 +2,7 @@ package lotto.entity;
 
 import lotto.enums.LottoRank;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,31 +12,17 @@ public class GameManager {
         Map<LottoRank, Integer> result = new HashMap<>();
         for (LottoNumber lotto : userLottos) {
             var matchCount = getMatchCount(winningNumber.getLottoNumber(), lotto);
-            if (lotto.getLottoNumber().contains(bonusNumber)
-                    && LottoRank.SECOND.getMatchCount() == matchCount) {
-                extracted(LottoRank.SECOND, result);
-
-                continue;
-            }
-
-            for (var lottoRank : LottoRank.values()) {
-                if (lottoRank == LottoRank.SECOND) {
-                    continue;
-                }
-
-                if (lottoRank.getMatchCount() == matchCount) {
-                    extracted(lottoRank, result);
-                }
-            }
-
+            var bonusMatch = lotto.getLottoNumber().contains(bonusNumber);
+            Arrays.stream(LottoRank.values())
+                    .forEach(rank -> {
+                        if (rank.isMatch(matchCount, bonusMatch)) {
+                            var count = result.getOrDefault(rank, 0);
+                            result.put(rank, count + 1);
+                        }
+                    });
         }
 
         return result;
-    }
-
-    private void extracted(LottoRank rank, Map<LottoRank, Integer> result) {
-        var count = result.getOrDefault(rank, 0);
-        result.put(rank, count + 1);
     }
 
     private int getMatchCount(List<Number> winningNumber, LottoNumber userLotto) {
