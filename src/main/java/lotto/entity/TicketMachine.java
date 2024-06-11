@@ -1,5 +1,7 @@
 package lotto.entity;
 
+import lotto.utils.CommonUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -32,12 +34,12 @@ public class TicketMachine {
         return tickets;
     }
 
-    private List<Integer> getRandomNumber() {
+    private List<Number> getRandomNumber() {
         var numbers = IntStream.rangeClosed(1, 45)
                 .boxed()
                 .collect(Collectors.toList());
 
         Collections.shuffle(numbers);
-        return numbers.subList(0, 6);
+        return CommonUtils.intListToNumberList(numbers.subList(0, 6));
     }
 }
