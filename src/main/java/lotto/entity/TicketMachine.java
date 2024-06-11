@@ -9,24 +9,24 @@ import java.util.stream.IntStream;
 public class TicketMachine {
     public static final int TICKET_PRICE = 1000;
 
-    public List<Ticket> autoPurchase(Amount amount) {
+    public List<LottoNumber> autoPurchase(Amount amount) {
         var ticketCount = amount.getAmount() / TICKET_PRICE;
 
-        var tickets = new ArrayList<Ticket>();
+        var tickets = new ArrayList<LottoNumber>();
         for (int i = 0; i < ticketCount; i++) {
-            tickets.add(new Ticket(getRandomNumber()));
+            tickets.add(new LottoNumber(getRandomNumber()));
         }
 
         return tickets;
     }
 
     // TODO 이름좀 바꿔;;
-    public List<Ticket> manualPurchase(Amount amount, List<Ticket> lottoManualTickets) {
+    public List<LottoNumber> manualPurchase(Amount amount, List<LottoNumber> lottoManualTickets) {
         var ticketCount = (amount.getAmount() / TICKET_PRICE) - lottoManualTickets.size();
 
-        var tickets = new ArrayList<Ticket>();
+        var tickets = new ArrayList<LottoNumber>();
         for (int i = 0; i < ticketCount; i++) {
-            tickets.add(new Ticket(getRandomNumber()));
+            tickets.add(new LottoNumber(getRandomNumber()));
         }
 
         return tickets;

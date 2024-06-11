@@ -1,29 +1,29 @@
 package lotto.view;
 
-import lotto.entity.Ticket;
+import lotto.entity.LottoNumber;
 import lotto.enums.LottoRank;
 
 import java.util.List;
 import java.util.Map;
 
 public class ResultView {
-    public void showTicketDetail(List<Ticket> tickets) {
+    public void showTicketDetail(List<LottoNumber> tickets) {
         System.out.printf("%s개를 구매했습니다. \n", tickets.size());
         for (var ticket : tickets) {
-            System.out.println(ticket.getNumbers());
+            System.out.println(ticket.getLottoNumber());
         }
 
         System.out.println();
     }
 
-    public void showTicketDetail2(List<Ticket> manualTickets, List<Ticket> autoTickets) {
+    public void showTicketDetail2(List<LottoNumber> manualTickets, List<LottoNumber> autoTickets) {
         System.out.printf("수동으로 %s장, 자동으로 %s개를 구매했습니다. \n", manualTickets.size(), autoTickets.size());
         for (var ticket : manualTickets) {
-            System.out.println(ticket.getNumbers());
+            System.out.println(ticket.getLottoNumber());
         }
 
         for (var ticket : autoTickets) {
-            System.out.println(ticket.getNumbers());
+            System.out.println(ticket.getLottoNumber());
         }
 
         System.out.println();

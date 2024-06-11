@@ -4,26 +4,26 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Ticket {
+public class LottoNumber {
     private static final int LOTTO_COUNT = 6;
-    private List<Integer> numbers;
+    private final List<Integer> lottoNumber;
 
-    public Ticket(String[] winningNumbers) {
-        this(Arrays.stream(winningNumbers)
+    public LottoNumber(String[] lottoNumbers) {
+        this(Arrays.stream(lottoNumbers)
                 .mapToInt(value -> Integer.parseInt(value.trim()))
                 .boxed()
                 .collect(Collectors.toList()));
     }
 
-    public Ticket(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_COUNT) {
+    public LottoNumber(List<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_COUNT) {
             throw new IllegalArgumentException("numbers cannot exceed 6.");
         }
 
-        this.numbers = numbers;
+        this.lottoNumber = lottoNumbers;
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public List<Integer> getLottoNumber() {
+        return lottoNumber;
     }
 }
