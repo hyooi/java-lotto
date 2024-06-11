@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 public class GameManager {
-    public Map<LottoRank, Integer> getWinningDetails(LottoNumber lottoNumber, Number bonusNumber, List<LottoNumber> userTickets) {
+    public Map<LottoRank, Integer> getWinningDetails(LottoNumber winningNumber, Number bonusNumber, List<LottoNumber> userLottos) {
         Map<LottoRank, Integer> result = new HashMap<>();
-        for (LottoNumber ticket : userTickets) {
-            var matchCount = getMatchCount(lottoNumber.getLottoNumber(), ticket);
-            if (ticket.getLottoNumber().contains(bonusNumber)
+        for (LottoNumber lotto : userLottos) {
+            var matchCount = getMatchCount(winningNumber.getLottoNumber(), lotto);
+            if (lotto.getLottoNumber().contains(bonusNumber)
                     && LottoRank.SECOND.getMatchCount() == matchCount) {
                 extracted(LottoRank.SECOND, result);
 
@@ -38,10 +38,10 @@ public class GameManager {
         result.put(rank, count + 1);
     }
 
-    private int getMatchCount(List<Number> winningNumber, LottoNumber targetTicket) {
+    private int getMatchCount(List<Number> winningNumber, LottoNumber userLotto) {
         var result = 0;
         for (var number : winningNumber) {
-            if (targetTicket.getLottoNumber().contains(number)) {
+            if (userLotto.getLottoNumber().contains(number)) {
                 result++;
             }
         }

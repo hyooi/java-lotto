@@ -11,16 +11,16 @@ public class ViewManager {
         var amount = inputView.inputAmount();
 
         var lottoMachine = new LottoMachine();
-        var tickets = lottoMachine.buy(amount);
-        resultView.showTicketDetail(tickets);
+        var lottos = lottoMachine.buy(amount);
+        resultView.printPurchasedAutoLotto(lottos);
 
         var winningNumber = inputView.inputWinningNumber();
         var bonusNumber = inputView.inputBonusNumber();
 
         var gameManager = new GameManager();
-        var result = gameManager.getWinningDetails(winningNumber, bonusNumber, tickets);
+        var result = gameManager.getWinningDetails(winningNumber, bonusNumber, lottos);
 
-        resultView.showStatistics(result);
-        resultView.showProfitRate(gameManager.getProfitRate(amount, result));
+        resultView.printStatisticsResult(result);
+        resultView.printProfitRate(gameManager.getProfitRate(amount, result));
     }
 }

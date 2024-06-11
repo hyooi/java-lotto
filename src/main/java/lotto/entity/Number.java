@@ -19,4 +19,9 @@ public class Number {
     public boolean equals(Object obj) {
         return obj instanceof Number && number == ((Number) obj).number;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
 }
