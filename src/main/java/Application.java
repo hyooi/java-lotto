@@ -1,7 +1,7 @@
-import lotto.view.ViewManager;
+import lotto.view.ViewManager2;
 
 public class Application {
     public static void main(String[] args) {
-        new ViewManager().start();
+        new ViewManager2().start();
     }
 }

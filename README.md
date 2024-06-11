@@ -19,3 +19,4 @@
 - [X] client에게 당첨번호와 구매한 티켓 리스트를 받는 로또매니저 클래스를 생성한다. 당첨 통계 내역 및 수익률을 만들어 반환한다.
 - [X] 입력받은 당첨번호가 숫자가 아니거나(NumberFormatException), 6개가 아니면(IllegalArgumentException) 예외를 발생시킨다.
 - [X] 보너스 번호가 숫자가 아니면(NumberFormatException) 예외를 발생시킨다.
+- [ ] 입력한 값보다 사고자 하는 수동 로또 갯수가 많으면 예외를 발생시킨다. 
