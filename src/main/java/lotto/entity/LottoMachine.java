@@ -2,7 +2,6 @@ package lotto.entity;
 
 import lotto.utils.CommonUtils;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,13 +12,9 @@ public class LottoMachine {
 
     public List<LottoNumber> buy(Amount amount) {
         var lottoCount = amount.getAmount() / LOTTO_PRICE;
-
-        var lottos = new ArrayList<LottoNumber>();
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new LottoNumber(getRandomNumber()));
-        }
-
-        return lottos;
+        return IntStream.range(0, lottoCount)
+                .mapToObj(i -> new LottoNumber(getRandomNumber()))
+                .collect(Collectors.toList());
     }
 
     private List<Number> getRandomNumber() {
