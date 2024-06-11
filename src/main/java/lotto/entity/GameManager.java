@@ -2,51 +2,26 @@ package lotto.entity;
 
 import lotto.enums.LottoRank;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class GameManager {
-    public Map<LottoRank, Integer> getWinningDetails(LottoNumber winningNumber, Number bonusNumber, List<LottoNumber> userLottos) {
-        Map<LottoRank, Integer> result = new HashMap<>();
-        for (LottoNumber lotto : userLottos) {
-            var matchCount = getMatchCount(winningNumber.getLottoNumber(), lotto);
-            if (lotto.getLottoNumber().contains(bonusNumber)
-                    && LottoRank.SECOND.getMatchCount() == matchCount) {
-                extracted(LottoRank.SECOND, result);
+    public WinningDetail getWinningDetails(LottoNumber winningNumber, Number bonusNumber, List<LottoNumber> userLottos) {
+        var result = new WinningDetail();
+        userLottos.forEach(userLotto -> {
+            var matchCount = getMatchCount(winningNumber.getLottoNumber(), userLotto);
+            var bonusMatch = userLotto.getLottoNumber().contains(bonusNumber);
 
-                continue;
-            }
-
-            for (var lottoRank : LottoRank.values()) {
-                if (lottoRank == LottoRank.SECOND) {
-                    continue;
-                }
-
-                if (lottoRank.getMatchCount() == matchCount) {
-                    extracted(lottoRank, result);
-                }
-            }
-
-        }
+            result.apply(matchCount, bonusMatch);
+        });
 
         return result;
-    }
-
-    private void extracted(LottoRank rank, Map<LottoRank, Integer> result) {
-        var count = result.getOrDefault(rank, 0);
-        result.put(rank, count + 1);
     }
 
     private int getMatchCount(List<Number> winningNumber, LottoNumber userLotto) {
-        var result = 0;
-        for (var number : winningNumber) {
-            if (userLotto.getLottoNumber().contains(number)) {
-                result++;
-            }
-        }
-
-        return result;
+        return (int) winningNumber.stream()
+                .filter(userLotto.getLottoNumber()::contains)
+                .count();
     }
 
     public double getProfitRate(Amount amount, Map<LottoRank, Integer> countByLottoRank) {

@@ -1,5 +1,7 @@
 package lotto.entity;
 
+import java.util.Objects;
+
 public class Number {
     private final int number;
 
@@ -18,6 +20,11 @@ public class Number {
     @Override
     public boolean equals(Object obj) {
         return obj instanceof Number && number == ((Number) obj).number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 
     @Override

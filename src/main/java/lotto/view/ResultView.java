@@ -1,11 +1,11 @@
 package lotto.view;
 
 import lotto.entity.LottoNumber;
+import lotto.entity.WinningDetail;
 import lotto.enums.LottoRank;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class ResultView {
     public void printPurchasedAutoLotto(List<LottoNumber> lottos) {
@@ -23,13 +23,13 @@ public class ResultView {
         System.out.println();
     }
 
-    public void printStatisticsResult(Map<LottoRank, Integer> result) {
+    public void printStatisticsResult(WinningDetail result) {
         System.out.println("당첨 통계");
         System.out.println("-------");
 
         Arrays.stream(LottoRank.values())
                 .forEach(rank -> {
-                    System.out.printf("%s개 일치 (%s원)-%s개\n", rank.getMatchCount(), rank.getReward(), result.getOrDefault(rank, 0));
+                    System.out.printf("%s개 일치 (%s원)-%s개\n", rank.getMatchCount(), rank.getReward(), result.getResult().getOrDefault(rank, 0));
                 });
     }
 
