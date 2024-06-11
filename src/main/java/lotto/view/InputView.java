@@ -1,7 +1,9 @@
 package lotto.view;
 
+import lotto.entity.Amount;
+import lotto.entity.LottoCount;
+import lotto.entity.LottoNumber;
 import lotto.entity.Number;
-import lotto.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,20 +22,20 @@ public class InputView {
         return new LottoCount(SCAN.nextLine());
     }
 
-    public List<Ticket> inputLottoNumbers(LottoCount lottoCount) {
+    public List<LottoNumber> inputLottoNumbers(LottoCount lottoCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        var result = new ArrayList<Ticket>();
+        var result = new ArrayList<LottoNumber>();
         for (int i = 0; i < lottoCount.getLottoCount(); i++) {
-            result.add(new Ticket(SCAN.nextLine().split(",")));
+            result.add(new LottoNumber(SCAN.nextLine().split(",")));
         }
 
         return result;
     }
 
-    public WinningNumber inputWinningNumber() {
+    public LottoNumber inputWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new WinningNumber(SCAN.nextLine().split(","));
+        return new LottoNumber(SCAN.nextLine().split(","));
     }
 
     public Number inputBonusNumber() {

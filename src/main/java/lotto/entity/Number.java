@@ -7,11 +7,21 @@ public class Number {
         this(Integer.parseInt(number));
     }
 
-    public Number(int number) {
+    private Number(int number) {
         this.number = number;
     }
 
-    public int getNumber() {
-        return number;
+    public static Number of(int number) {
+        return new Number(number);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Number && number == ((Number) obj).number;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 }
