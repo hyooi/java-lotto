@@ -11,23 +11,21 @@ public abstract class ViewManager {
     protected final InputView inputView = new InputView();
     protected final ResultView resultView = new ResultView();
 
+    private final LottoMachine lottoMachine = new LottoMachine();
+    private final GameManager gameManager = new GameManager();
+
     public void start() {
         var amount = inputView.inputAmount();
         var manualLottos = buyManualLotto();
 
-        var lottoMachine = new LottoMachine();
-        amount = lottoMachine.calculateRemainAmount(amount, manualLottos);
-
-        var autoLottos = lottoMachine.buy(amount);
+        var autoLottos = lottoMachine.buy(lottoMachine.calculateRemainAmount(amount, manualLottos));
         printPurchasedLotto(manualLottos, autoLottos);
 
-        var winningNumber = inputView.inputWinningNumber();
-        var bonusNumber = inputView.inputBonusNumber();
-
-        var gameManager = new GameManager();
-        var allLottos = mergeLottos(manualLottos, autoLottos);
-        var result = gameManager.getWinningDetails(winningNumber, bonusNumber, allLottos);
-
+        var result = gameManager.getWinningDetails(
+                inputView.inputWinningNumber(),
+                inputView.inputBonusNumber(),
+                mergeLottos(manualLottos, autoLottos)
+        );
         resultView.printStatisticsResult(result);
         resultView.printProfitRate(gameManager.getProfitRate(amount, result.getResult()));
     }
