@@ -13,7 +13,8 @@ public class ViewManager2 {
         var manualTickets = inputView.inputLottoNumbers(lottoCount);
 
         var ticketMachine = new TicketMachine();
-        var autoTickets = ticketMachine.manualPurchase(amount, manualTickets);
+        var remainAmount = ticketMachine.calculateRemainAmount(amount, manualTickets);
+        var autoTickets = ticketMachine.buy(remainAmount);
         resultView.showTicketDetail2(manualTickets, autoTickets);
 
         var winningNumber = inputView.inputWinningNumber();

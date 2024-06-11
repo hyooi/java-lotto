@@ -11,7 +11,7 @@ public class ViewManager {
         var amount = inputView.inputAmount();
 
         var ticketMachine = new TicketMachine();
-        var tickets = ticketMachine.autoPurchase(amount);
+        var tickets = ticketMachine.buy(amount);
         resultView.showTicketDetail(tickets);
 
         var winningNumber = inputView.inputWinningNumber();

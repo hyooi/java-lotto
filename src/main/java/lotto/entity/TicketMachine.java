@@ -11,20 +11,8 @@ import java.util.stream.IntStream;
 public class TicketMachine {
     public static final int TICKET_PRICE = 1000;
 
-    public List<LottoNumber> autoPurchase(Amount amount) {
+    public List<LottoNumber> buy(Amount amount) {
         var ticketCount = amount.getAmount() / TICKET_PRICE;
-
-        var tickets = new ArrayList<LottoNumber>();
-        for (int i = 0; i < ticketCount; i++) {
-            tickets.add(new LottoNumber(getRandomNumber()));
-        }
-
-        return tickets;
-    }
-
-    // TODO 이름좀 바꿔;;
-    public List<LottoNumber> manualPurchase(Amount amount, List<LottoNumber> lottoManualTickets) {
-        var ticketCount = (amount.getAmount() / TICKET_PRICE) - lottoManualTickets.size();
 
         var tickets = new ArrayList<LottoNumber>();
         for (int i = 0; i < ticketCount; i++) {
@@ -41,5 +29,9 @@ public class TicketMachine {
 
         Collections.shuffle(numbers);
         return CommonUtils.intListToNumberList(numbers.subList(0, 6));
+    }
+
+    public Amount calculateRemainAmount(Amount oldAmount, List<LottoNumber> manualTickets) {
+        return new Amount(oldAmount.getAmount() - manualTickets.size() * TICKET_PRICE);
     }
 }
