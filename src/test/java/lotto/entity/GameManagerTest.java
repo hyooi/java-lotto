@@ -24,7 +24,7 @@ class GameManagerTest {
                         new LottoNumber(CommonUtils.intListToNumberList(List.of(1, 2, 3, 4, 5, 7))
                         )));
 
-        assertThat(result)
+        assertThat(result.getResult())
                 .hasSize(2)
                 .containsEntry(LottoRank.FIRST, 1)
                 .containsEntry(LottoRank.SECOND, 1)

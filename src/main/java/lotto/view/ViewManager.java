@@ -29,7 +29,7 @@ public abstract class ViewManager {
         var result = gameManager.getWinningDetails(winningNumber, bonusNumber, allLottos);
 
         resultView.printStatisticsResult(result);
-        resultView.printProfitRate(gameManager.getProfitRate(amount, result));
+        resultView.printProfitRate(gameManager.getProfitRate(amount, result.getResult()));
     }
 
     private List<LottoNumber> mergeLottos(List<LottoNumber> manualLottos, List<LottoNumber> autoLottos) {
