@@ -1,6 +1,6 @@
 package lotto.entity;
 
-public class WinningLotto {
+public final class WinningLotto {
     public static final String WINNING_NUMBERS_AND_BONUS_BALLS_CANNOT_OVERLAP = "당첨번호와 보너스볼은 중복될 수 없습니다.";
 
     private final Lotto winningLotto;

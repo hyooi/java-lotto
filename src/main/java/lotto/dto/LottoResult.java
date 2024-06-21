@@ -4,7 +4,7 @@ import lotto.enums.LottoRank;
 
 import java.util.Map;
 
-public class LottoResult {
+public final class LottoResult {
     private final Map<LottoRank, Integer> countByLottoRank;
 
     public LottoResult(Map<LottoRank, Integer> countByLottoRank) {

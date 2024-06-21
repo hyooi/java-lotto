@@ -1,6 +1,6 @@
 package lotto.entity;
 
-public class LottoBudget {
+public final class LottoBudget {
     private static final int LOTTO_PRICE = 1000;
     private final int money;
 
