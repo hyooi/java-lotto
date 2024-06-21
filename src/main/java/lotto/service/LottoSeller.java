@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.entity.Lotto;
+import lotto.entity.LottoBudget;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -12,29 +13,18 @@ import java.util.stream.IntStream;
 import static lotto.entity.Lotto.*;
 
 public class LottoSeller {
-    public static final int LOTTO_PRICE = 1000;
-    public static final String LOTTO_PRICE_1000 = "로또는 1장에 천원입니다.";
+    private final List<Integer> lottos = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+            .boxed()
+            .collect(Collectors.toList());
 
-    public List<Lotto> buyLotto(int money) {
-        if (money < LOTTO_PRICE) {
-            throw new IllegalArgumentException(LOTTO_PRICE_1000);
-        }
-
-        var lottoCount = money / LOTTO_PRICE;
-        return IntStream.range(0, lottoCount)
+    public List<Lotto> buyLotto(LottoBudget budget) {
+        return IntStream.range(0, budget.getAvailableLottoCount())
                 .mapToObj(i -> new Lotto(randomNumbers()))
                 .collect(Collectors.toList());
     }
 
     private Set<Integer> randomNumbers() {
-        return new HashSet<>(IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .boxed()
-                .collect(Collectors.collectingAndThen(
-                        Collectors.toList(),
-                        list -> {
-                            Collections.shuffle(list);
-                            return list.subList(0, LOTTO_NUMBER_COUNT);
-                        }
-                )));
+        Collections.shuffle(lottos);
+        return new HashSet<>(lottos.subList(0, LOTTO_NUMBER_COUNT));
     }
 }
