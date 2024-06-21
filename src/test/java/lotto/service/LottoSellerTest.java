@@ -38,4 +38,12 @@ class LottoSellerTest {
                             .allMatch(number -> number >= MIN_LOTTO_NUMBER && number <= MAX_LOTTO_NUMBER);
                 });
     }
+
+    @Test
+    @DisplayName("금액이 부족하면 로또를 사지 않는다.")
+    void buy4() {
+        var result = seller.buyLotto(new LottoBudget(500));
+        assertThat(result)
+                .hasSize(0);
+    }
 }
