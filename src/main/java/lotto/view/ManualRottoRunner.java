@@ -1,14 +1,15 @@
 package lotto.view;
 
 import lotto.entity.Lotto;
+import lotto.entity.LottoBudget;
 
 import java.util.List;
 
 public class ManualRottoRunner extends RottoRunner {
 
     @Override
-    protected List<Lotto> buyManualLotto() {
-        return inputView.inputManualLotto();
+    protected List<Lotto> buyManualLotto(LottoBudget budget) {
+        return inputView.inputManualLotto(budget);
     }
 
     @Override

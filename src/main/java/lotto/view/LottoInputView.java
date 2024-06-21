@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.entity.Lotto;
+import lotto.entity.LottoBudget;
 import lotto.entity.WinningLotto;
 
 import java.util.Arrays;
@@ -9,17 +10,18 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoInputView extends InputView {
-    public int inputMoney() {
+    public LottoBudget inputMoney() {
         return process(() -> {
             System.out.println("구입금액을 입력해 주세요.");
-            return inputNumber();
+            return new LottoBudget(inputNumber());
         });
     }
 
-    public List<Lotto> inputManualLotto() {
+    public List<Lotto> inputManualLotto(LottoBudget budget) {
         return process(() -> {
             System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
             var lottoCount = inputNumber();
+            budget.getBudgetExcludingLotto(lottoCount);
 
             System.out.println("수동으로 구매할 번호를 입력해 주세요.");
             return IntStream.range(0, lottoCount)
